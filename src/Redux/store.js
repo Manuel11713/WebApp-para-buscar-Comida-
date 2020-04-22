@@ -5,7 +5,12 @@ let initialState = {
 }
 
 const reducerRecetas = (state=initialState,action)=>{
-
+    if(action.type==='CAMBIAR_COMIDAS'){
+        return({
+            ...state,
+            recetasHome:action.comidas
+        })
+    }
     return state
 };
 

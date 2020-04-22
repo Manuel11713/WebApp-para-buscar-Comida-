@@ -5,13 +5,19 @@ import store from './Redux/store';
 
 //Views
 import Home from './Views/Home/Home.jsx';
-
+import Receta from './Views/Receta/Receta.jsx';
 const App=()=> {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/receta/:id" render={props=>{
+            console.log(props)
+            return(
+              <Receta id={props.match.params.id}/>
+            );
+          }} />
         </Switch>
       </Router>
     </Provider>
