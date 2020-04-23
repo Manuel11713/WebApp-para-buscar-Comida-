@@ -1,14 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 import {Col,Row,Menu,Typography,Input, Button} from 'antd';
 import {UserOutlined} from '@ant-design/icons'
 import imagen from '../Complementos/comida.svg';
+import { Link } from 'react-router-dom';
 const Header = ({setComidas}) =>{
     const buscar=value=>{
         console.log(value)
-         axios.get(`https://api.spoonacular.com/recipes/search?query=${value}&number=20&apiKey=cbdf02b947dc4c3183ed95e3c59fa007`)
-             .then(res=>{
-
+        axios.get(`https://api.spoonacular.com/recipes/search?query=${value}&number=20&apiKey=cbdf02b947dc4c3183ed95e3c59fa007`)
+            .then(res=>{
                 console.log(res.data.results);
                 let resetas = res.data.results;
                 resetas = resetas.map(reseta=>{
@@ -16,14 +17,12 @@ const Header = ({setComidas}) =>{
                     return(reseta);
                 });
                 setComidas(resetas);
-
-            })
-             
-             
+                
+            });      
     }
     return(
         <Row style={{padding:'20px 50px',boxShadow: '0 2px 8px #f0f1f2'}}>
-            <Col xs={1}><img height={50} src={imagen} alt="logo empresa"/></Col>
+            <Col xs={1}><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>
             <Col xs={4}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Typography.Title level={3} style={{margin:0}}  >Fishing Food</Typography.Title>
@@ -69,5 +68,14 @@ const Header = ({setComidas}) =>{
         </Row>
     );
 }
-
-export default Header;
+const dispatchToProps = dispatch =>{
+    return({
+        setComidas(comidas){
+            dispatch({
+                comidas,
+                type:'CAMBIAR_COMIDAS'
+            });
+        }
+    });
+}
+export default connect(null,dispatchToProps)(Header);

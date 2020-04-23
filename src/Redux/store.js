@@ -1,7 +1,8 @@
 import {createStore} from 'redux';
 
 let initialState = {
-    recetasHome:[]
+    recetasHome:null,
+    query:null
 }
 
 const reducerRecetas = (state=initialState,action)=>{

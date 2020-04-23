@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import {Button, Card, Avatar,Row,Col,Typography,Rate} from 'antd';
 const Comidas = ({comidas})=>{
     
@@ -67,6 +68,10 @@ const Comidas = ({comidas})=>{
         </Row>
     );
 }
+const stateToProps=state=>{
+    return({
+        comidas:state.recetasHome
+    });
+}
 
-
-export default Comidas;
+export default connect(stateToProps,null)(Comidas);

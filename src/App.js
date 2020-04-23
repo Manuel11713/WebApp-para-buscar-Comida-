@@ -13,7 +13,6 @@ const App=()=> {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/receta/:id" render={props=>{
-            console.log(props)
             return(
               <Receta id={props.match.params.id}/>
             );
