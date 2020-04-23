@@ -8,7 +8,7 @@ const Comidas = ({comidas})=>{
         let cargando=[]
         for(let i=0;i<=20;i++){
             cargando.push(
-            <Col xs={6}>
+            <Col xs={24} sm={12} md={8} xl={6}>
                 <Card style={{ width: 300, marginTop: 16 }} loading={true}>
                     <Card.Meta
                     avatar={
@@ -36,7 +36,7 @@ const Comidas = ({comidas})=>{
                 let calificación = Math.ceil(comida.spoonacularScore/20);
                 
                 return(
-                    <Col xs={6} key={comida.id}>
+                    <Col xs={24} sm={12} md={8} xl={6} key={comida.id}>
                         <Link to={`/receta/${comida.id}`}>
                             <Card
                                 hoverable

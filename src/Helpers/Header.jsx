@@ -22,13 +22,13 @@ const Header = ({setComidas}) =>{
     }
     return(
         <Row style={{padding:'20px 50px',boxShadow: '0 2px 8px #f0f1f2'}}>
-            <Col xs={1}><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>
-            <Col xs={4}>
+            <Col xs={4} md={2}  ><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>
+            <Col xs={6} md={4}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Typography.Title level={3} style={{margin:0}}  >Fishing Food</Typography.Title>
                 </Row>
             </Col>
-            <Col xs={10}>
+            <Col xs={10} md={6} xl={6}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Input.Search
                         placeholder="solo busquedas en ingles"
@@ -37,7 +37,7 @@ const Header = ({setComidas}) =>{
                     />
                 </Row>
             </Col>
-            <Col xs={7}>
+            <Col xs={0} xl={9} style={{paddingLeft:20}}>
                 <Row>
                     <Menu mode="horizontal" selectedKeys={['inicio']} >
                         <Menu.Item key="inicio">
@@ -58,7 +58,14 @@ const Header = ({setComidas}) =>{
                     </Menu>
                 </Row>
             </Col>
-            <Col xm={2}>
+            <Col xs={2} xl={0} style={{paddingLeft:20}}>
+                <Row align="middle" style={{height:"100%"}}>
+                    <Button  shape="circle">
+                        <UserOutlined />
+                    </Button>
+                </Row>
+            </Col>
+            <Col xs={1} style={{paddingLeft:20}}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Button  shape="circle">
                         <UserOutlined />
