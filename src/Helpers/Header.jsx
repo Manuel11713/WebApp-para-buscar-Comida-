@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {Col,Row,Menu,Typography,Input, Button} from 'antd';
-import {UserOutlined} from '@ant-design/icons'
+import {UserOutlined,DownOutlined } from '@ant-design/icons'
 import imagen from '../Complementos/comida.svg';
 import { Link } from 'react-router-dom';
-const Header = ({setComidas}) =>{
+const Header = ({setComidas,nombreUsuario}) =>{
     const buscar=value=>{
         console.log(value)
         axios.get(`https://api.spoonacular.com/recipes/search?query=${value}&number=20&apiKey=cbdf02b947dc4c3183ed95e3c59fa007`)
@@ -20,15 +20,17 @@ const Header = ({setComidas}) =>{
                 
             });      
     }
+    if(!nombreUsuario)nombreUsuario = localStorage.getItem('usuario');
+
     return(
         <Row style={{padding:'20px 50px',boxShadow: '0 2px 8px #f0f1f2'}}>
-            <Col xs={4} md={2}  ><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>
-            <Col xs={6} md={4}>
+            <Col xs={8} sm={4} md={2}  ><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>
+            <Col xs={10} sm={6} md={4}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Typography.Title level={3} style={{margin:0}}  >Fishing Food</Typography.Title>
                 </Row>
             </Col>
-            <Col xs={10} md={6} xl={6}>
+            <Col xs={0} sm={10} md={6} xl={6}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Input.Search
                         placeholder="solo busquedas en ingles"
@@ -61,15 +63,23 @@ const Header = ({setComidas}) =>{
             <Col xs={2} xl={0} style={{paddingLeft:20}}>
                 <Row align="middle" style={{height:"100%"}}>
                     <Button  shape="circle">
-                        <UserOutlined />
+                        <DownOutlined />
                     </Button>
                 </Row>
             </Col>
             <Col xs={1} style={{paddingLeft:20}}>
                 <Row align="middle" style={{height:"100%"}}>
-                    <Button  shape="circle">
-                        <UserOutlined />
-                    </Button>
+
+                    {nombreUsuario? 
+                    <Button>
+                        <UserOutlined/>{nombreUsuario}
+                    </Button>:
+                    <Link to="/signUp">
+                        <Button type="primary">
+                            Login
+                        </Button>
+                    </Link>}
+
                 </Row>
             </Col>
         </Row>
@@ -82,7 +92,18 @@ const dispatchToProps = dispatch =>{
                 comidas,
                 type:'CAMBIAR_COMIDAS'
             });
+        },
+        setNombreUsuario(nombreUsuario){
+            dispatch({
+                nombreUsuario,
+                type:'CAMBIAR_NOMBRE'
+            });
         }
     });
 }
-export default connect(null,dispatchToProps)(Header);
+const stateToProps=state=>{
+    return({
+        nombreUsuario:state.nombreUsuario
+    });
+}
+export default connect(stateToProps,dispatchToProps)(Header);

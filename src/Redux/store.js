@@ -2,7 +2,8 @@ import {createStore} from 'redux';
 
 let initialState = {
     recetasHome:null,
-    query:null
+    query:null, //Query del buscador
+    nombreUsuario:null
 }
 
 const reducerRecetas = (state=initialState,action)=>{
@@ -10,6 +11,12 @@ const reducerRecetas = (state=initialState,action)=>{
         return({
             ...state,
             recetasHome:action.comidas
+        })
+    }
+    if(action.type==='CAMBIAR_NOMBRE'){
+        return({
+            ...state,
+            nombreUsuario:action.nombreUsuario
         })
     }
     return state

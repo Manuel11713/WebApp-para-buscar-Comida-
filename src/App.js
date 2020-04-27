@@ -6,6 +6,9 @@ import store from './Redux/store';
 //Views
 import Home from './Views/Home/Home.jsx';
 import Receta from './Views/Receta/Receta.jsx';
+import SignUp from './Views/SignUp/SignUp.jsx';
+import Login from './Views/Login/Login.jsx';
+
 const App=()=> {
   return (
     <Provider store={store}>
@@ -17,6 +20,9 @@ const App=()=> {
               <Receta id={props.match.params.id}/>
             );
           }} />
+          <Route exact path="/signUp" component={SignUp}/>
+
+          <Route exact path="/login" component={Login}/>
         </Switch>
       </Router>
     </Provider>

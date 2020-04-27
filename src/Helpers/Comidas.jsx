@@ -9,7 +9,7 @@ const Comidas = ({comidas})=>{
         for(let i=0;i<=20;i++){
             cargando.push(
             <Col xs={24} sm={12} md={8} xl={6}>
-                <Card style={{ width: 300, marginTop: 16 }} loading={true}>
+                <Card style={{ width:'100%', marginTop: 16 }} loading={true}>
                     <Card.Meta
                     avatar={
                         <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
@@ -25,6 +25,7 @@ const Comidas = ({comidas})=>{
     }
     //console.log(comidas)
     return(
+        <>
         <Row style={{padding:'20px 50px'}}>
             
             <Col xs={24}>
@@ -32,15 +33,17 @@ const Comidas = ({comidas})=>{
                     Recetas mas Conocidas
                 </Typography.Title>
             </Col>
+        </Row>
+        <Row justify="center" >
             {comidas.map(comida=>{
                 let calificación = Math.ceil(comida.spoonacularScore/20);
                 
                 return(
-                    <Col xs={24} sm={12} md={8} xl={6} key={comida.id}>
+                    <Col xs={24} sm={12} md={8} xl={6} key={comida.id} style={{padding:8}}>
                         <Link to={`/receta/${comida.id}`}>
                             <Card
                                 hoverable
-                                style={{ width: 300,marginTop:10 }}
+                                style={{ width:'100%',marginTop:10 }}
                                 cover={
                                 <img
                                     alt="example"
@@ -66,6 +69,7 @@ const Comidas = ({comidas})=>{
             })}
             
         </Row>
+        </>
     );
 }
 const stateToProps=state=>{
