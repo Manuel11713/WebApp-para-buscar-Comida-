@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import {Row,Card,Form,Input,Checkbox,Button,Divider,message} from 'antd';
 import axios from 'axios';
+import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import HeaderLogin from '../../Helpers/HeaderLogin.jsx';
 import './SignUp.css';
-const Login = () =>{
+const Login = ({setUsuario}) =>{
     const [redir,setRedir] = useState(false);
 
     const onFinish=(values)=>{
@@ -13,18 +14,24 @@ const Login = () =>{
             password:values.password,
             user:values.username
         }
-        axios.post('http://localhost:5000/signUp',data).then(res=>{
-            console.log(res)
-            if(res.data.code==1){//Si el usuario fue guardado
-                if(values.remember===true){localStorage.setItem('token',res.data.token); localStorage.setItem('usuario',values.username)}
-                else{//Codigo Redux para actualizar el estado
-                    console.log('debes actualizar el redux');
+        
+        axios.post(`${process.env.REACT_APP_API_URL}signUp`,data).then(res=>{
+            //console.log(res)
+            if(res.data.code===1){//Si el usuario fue guardado
+                if(values.remember===true){
+                    localStorage.setItem('token',res.data.token); 
+                    localStorage.setItem('usuario',values.username);
+                    setUsuario(values.username);
                 }
+                // else{//Codigo Redux para actualizar el estado
+                //     console.log('debes actualizar el redux');
+                //     setUsuario(values.username);
+                // }
 
 
                 setRedir(true);
             }
-            if(res.data.code==2)message.error(res.data.message);//Si el usuario ya existe en la base de datos
+            if(res.data.code===2)message.error(res.data.message);//Si el usuario ya existe en la base de datos
             
         });
     }
@@ -83,5 +90,15 @@ const Login = () =>{
         </div>
     );
 }
+const dispathToProps = dispatch =>{
+    return({
+        setUsuario(usuario){
+            dispatch({
+                usuario,
+                type:'CAMBIAR_NOMBRE'
+            });
+        }
+    });
+}
 
-export default Login;
+export default connect(null,dispathToProps)(Login);

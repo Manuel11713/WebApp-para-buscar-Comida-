@@ -8,7 +8,7 @@ import Home from './Views/Home/Home.jsx';
 import Receta from './Views/Receta/Receta.jsx';
 import SignUp from './Views/SignUp/SignUp.jsx';
 import Login from './Views/Login/Login.jsx';
-
+import Ruta from './Views/RotasExtras/Ruta.jsx';
 const App=()=> {
   return (
     <Provider store={store}>
@@ -23,6 +23,19 @@ const App=()=> {
           <Route exact path="/signUp" component={SignUp}/>
 
           <Route exact path="/login" component={Login}/>
+
+          <Route exact path="/ruta/:id" render={props=>{
+            return(
+              <Ruta id={props.match.params.id}/>
+            );
+          }} />
+
+
+          <Route path='*' render={()=>{
+            return(
+              <div>Vuelve al inicio rufian</div>
+            )
+          }}/>
         </Switch>
       </Router>
     </Provider>

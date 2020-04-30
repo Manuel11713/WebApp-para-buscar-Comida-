@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row,Col,Typography,Affix} from 'antd';
+import {Row,Col,Typography} from 'antd';
 import imagen from '../Complementos/comida.svg';
 import { Link } from 'react-router-dom';
 const HeaderLogin = () =>(

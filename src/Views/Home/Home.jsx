@@ -7,8 +7,8 @@ const Home = ({setComidas}) =>{
     setComidas(null);
     useEffect(()=>{
         const fetchComidas =async ()=>{
-            //let comidas = await axios.get('https://api.spoonacular.com/recipes/random?number=20&apiKey=cbdf02b947dc4c3183ed95e3c59fa007');
-            //setComidas(comidas.data.recipes);
+            let comidas = await axios.get('https://api.spoonacular.com/recipes/random?number=20&apiKey=cbdf02b947dc4c3183ed95e3c59fa007');
+            setComidas(comidas.data.recipes);
         }
         fetchComidas();
     },[setComidas]);

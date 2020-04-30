@@ -11,13 +11,14 @@ const reducerRecetas = (state=initialState,action)=>{
         return({
             ...state,
             recetasHome:action.comidas
-        })
+        });
     }
     if(action.type==='CAMBIAR_NOMBRE'){
+        
         return({
             ...state,
-            nombreUsuario:action.nombreUsuario
-        })
+            nombreUsuario:action.usuario
+        });
     }
     return state
 };

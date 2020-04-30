@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {Col,Row,Menu,Typography,Input, Button} from 'antd';
-import {UserOutlined,DownOutlined } from '@ant-design/icons'
+import {DownOutlined } from '@ant-design/icons'
 import imagen from '../Complementos/comida.svg';
 import { Link } from 'react-router-dom';
+import MenuPefil from './MenuPerfil.jsx';
 const Header = ({setComidas,nombreUsuario}) =>{
     const buscar=value=>{
         console.log(value)
@@ -20,8 +21,8 @@ const Header = ({setComidas,nombreUsuario}) =>{
                 
             });      
     }
-    if(!nombreUsuario)nombreUsuario = localStorage.getItem('usuario');
-
+    //if(!nombreUsuario)nombreUsuario = localStorage.getItem('usuario');
+    console.log(nombreUsuario);
     return(
         <Row style={{padding:'20px 50px',boxShadow: '0 2px 8px #f0f1f2'}}>
             <Col xs={8} sm={4} md={2}  ><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>
@@ -41,21 +42,29 @@ const Header = ({setComidas,nombreUsuario}) =>{
             </Col>
             <Col xs={0} xl={9} style={{paddingLeft:20}}>
                 <Row>
-                    <Menu mode="horizontal" selectedKeys={['inicio']} >
+                    <Menu mode="horizontal" defaultSelectedKeys={['inicio']} >
                         <Menu.Item key="inicio">
+                            <Link to="/">
                             Inicio
+                            </Link>
                         </Menu.Item>
                         
                         <Menu.Item key="direccion2">
-                            direccion 2
+                            <Link to="/ruta/2">
+                            Direccion 2
+                            </Link>
                         </Menu.Item>
                         
                         <Menu.Item key="direccion3">
-                            direccion 3
+                            <Link to="/ruta/3">
+                            Direccion 3
+                            </Link>
                         </Menu.Item>
                         
                         <Menu.Item key="direccion4">
-                            direccion 4
+                            <Link to="/ruta/4">
+                            Direccion 4
+                            </Link>
                         </Menu.Item>
                     </Menu>
                 </Row>
@@ -71,9 +80,7 @@ const Header = ({setComidas,nombreUsuario}) =>{
                 <Row align="middle" style={{height:"100%"}}>
 
                     {nombreUsuario? 
-                    <Button>
-                        <UserOutlined/>{nombreUsuario}
-                    </Button>:
+                    <MenuPefil nombreUsuario={nombreUsuario}/>:
                     <Link to="/signUp">
                         <Button type="primary">
                             Login
