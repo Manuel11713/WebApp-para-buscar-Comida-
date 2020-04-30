@@ -9,7 +9,7 @@ import MenuPefil from './MenuPerfil.jsx';
 const Header = ({setComidas,nombreUsuario}) =>{
     const buscar=value=>{
         console.log(value)
-        axios.get(`https://api.spoonacular.com/recipes/search?query=${value}&number=20&apiKey=cbdf02b947dc4c3183ed95e3c59fa007`)
+        axios.get(`https://api.spoonacular.com/recipes/search?query=${value}&number=20&apiKey=${process.env.REACT_APP_API_KEY}`)
             .then(res=>{
                 console.log(res.data.results);
                 let resetas = res.data.results;
@@ -21,8 +21,7 @@ const Header = ({setComidas,nombreUsuario}) =>{
                 
             });      
     }
-    //if(!nombreUsuario)nombreUsuario = localStorage.getItem('usuario');
-    console.log(nombreUsuario);
+    
     return(
         <Row style={{padding:'20px 50px',boxShadow: '0 2px 8px #f0f1f2'}}>
             <Col xs={8} sm={4} md={2}  ><Link to="/"><img height={50} src={imagen} alt="logo empresa"/></Link></Col>

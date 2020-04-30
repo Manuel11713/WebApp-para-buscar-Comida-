@@ -5,7 +5,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 const Login = ({setUsuario})=>{
-    console.log(process.env.NODE_ENV,process.env.REACT_APP_API_URL)
+
     const [tipoError,setTipoError] = useState(null);
     const [message,setMessage] = useState(null);
     const [redir,setRedir] = useState(false);
@@ -14,7 +14,6 @@ const Login = ({setUsuario})=>{
             email:values.email,
             password:values.password
         }
-        //http://localhost:5000/login
         axios.post(`${process.env.REACT_APP_API_URL}login`,data).then(res=>{
             if(!res.data.ok){setTipoError('error');setMessage(res.data.message)}
             else{
